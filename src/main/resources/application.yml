@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: ms-rutaexpress-audit
+  datasource:
+    url: jdbc:h2:mem:audit;DB_CLOSE_DELAY=-1
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: ""
+  jpa:
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
+  kafka:
+    consumer:
+      bootstrap-servers: ${KAFKA_BOOTSTRAP:localhost:9092}
+      group-id: audit
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+
+server:
+  port: 8085
