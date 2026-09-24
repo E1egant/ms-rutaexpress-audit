@@ -6,5 +6,5 @@ import java.time.Instant;
 /**
  * Entrada del timeline de auditoría de un envío.
  */
-public record AuditEntryDto(Long id, Long shipmentId, ShipmentStatus status, Instant occurredAt) {
+public record AuditEntryDto(Long id, Long shipmentId, ShipmentStatus status, String actor, Instant occurredAt) {
 }

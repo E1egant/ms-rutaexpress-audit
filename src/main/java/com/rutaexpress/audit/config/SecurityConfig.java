@@ -31,7 +31,7 @@ public class SecurityConfig {
         http
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/actuator/health", "/h2-console/**").permitAll()
-                        .requestMatchers("/api/audit/**").hasRole(Roles.ADMIN)
+                        .requestMatchers("/api/audit/**").hasAnyRole(Roles.ADMIN, Roles.AUDITOR)
                         .anyRequest().authenticated())
                 .oauth2ResourceServer(oauth2 -> oauth2
                         .jwt(jwt -> jwt.jwtAuthenticationConverter(jwtAuthenticationConverter)))

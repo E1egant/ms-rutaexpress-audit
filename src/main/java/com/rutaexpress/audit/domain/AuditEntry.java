@@ -29,6 +29,9 @@ public class AuditEntry {
     @Column(nullable = false)
     private Instant occurredAt;
 
+    @Column
+    private String actor;
+
     public Long getId() {
         return id;
     }
@@ -59,5 +62,13 @@ public class AuditEntry {
 
     public void setOccurredAt(Instant occurredAt) {
         this.occurredAt = occurredAt;
+    }
+
+    public String getActor() {
+        return actor;
+    }
+
+    public void setActor(String actor) {
+        this.actor = actor;
     }
 }

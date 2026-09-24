@@ -11,4 +11,5 @@ public final class Roles {
     public static final String OPERADOR = "Operador";
     public static final String BODEGA = "Bodega";
     public static final String ADMIN = "Admin";
+    public static final String AUDITOR = "Auditor";
 }

@@ -23,7 +23,9 @@ public class ShipmentEventConsumer {
         this.service = service;
     }
 
-    @KafkaListener(topics = MessagingConstants.SHIPMENT_EVENTS_TOPIC, groupId = "audit")
+    @KafkaListener(topics = {
+            MessagingConstants.SHIPMENT_EVENTS_TOPIC,
+            MessagingConstants.SHIPMENT_EVENTS_TOPIC_V2 }, groupId = "audit")
     public void onEvent(String json) {
         try {
             ShipmentEvent event = objectMapper.readValue(json, ShipmentEvent.class);
