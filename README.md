@@ -8,12 +8,12 @@ Spring Boot 3.3.5, Java 17+, Maven (`./mvnw`). Puerto local: **8085**. Responsab
 
 | Método | Ruta | Descripción |
 |---|---|---|
-| GET | `/api/audit` | eventos de auditoría |
+| GET | `/api/audit` | timeline con filtros `shipmentId`, `status`, `actor`, `from`, `to` (ISO-8601) |
 
 ## Perfiles
 
 - **por defecto (dev)**: H2 en memoria y **sin seguridad** (solo para desarrollo local).
-- **`secure`**: valida el JWT de Azure AD (`AZURE_TENANT_ID`) y aplica roles desde el claim `roles`.
+- **`secure`**: valida el JWT de Azure AD (`AZURE_TENANT_ID` + `AZURE_API_AUDIENCE`) y aplica roles `Admin` y `Auditor` desde el claim `roles`.
 - **`prod`**: PostgreSQL.
 
 ## Variables de entorno
@@ -22,7 +22,7 @@ Spring Boot 3.3.5, Java 17+, Maven (`./mvnw`). Puerto local: **8085**. Responsab
 
 ## Pruebas
 
-`./mvnw test` ejecuta 9 pruebas: servicio de auditoría, consumidor Kafka (JSON válido/ inválido) y seguridad por perfil `secure`. No necesitan brokers ni base de datos externos (H2 en memoria; los listeners de RabbitMQ/Kafka se desactivan en los tests).
+`./mvnw test` ejecuta 16 pruebas: servicio, filtros (@DataJpaTest con H2), API, consumidor Kafka (JSON válido/inválido) y seguridad por perfil `secure`. No necesitan brokers ni base de datos externos (H2 en memoria; los listeners de Kafka se desactivan en los tests).
 
 ## Ejecutar
 

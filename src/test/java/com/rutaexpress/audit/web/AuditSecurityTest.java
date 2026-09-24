@@ -39,6 +39,12 @@ class AuditSecurityTest {
     }
 
     @Test
+    void conRolAuditorRetorna200() throws Exception {
+        mvc.perform(get("/api/audit").with(jwt().authorities(new SimpleGrantedAuthority("ROLE_Auditor"))))
+                .andExpect(status().isOk());
+    }
+
+    @Test
     void healthEsPublicoAunqueElBrokerNoEsteDisponible() throws Exception {
         // 200 si todo está arriba; 503 si un broker no responde. Lo relevante: no exige token.
         mvc.perform(get("/actuator/health")).andExpect(status().is(org.hamcrest.Matchers.oneOf(200, 503)));

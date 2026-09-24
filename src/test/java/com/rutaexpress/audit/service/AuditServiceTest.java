@@ -31,12 +31,13 @@ class AuditServiceTest {
     void recordPersisteElEventoDelEnvio() {
         Instant now = Instant.parse("2026-09-21T12:00:00Z");
 
-        service.record(new ShipmentEvent(UUID.randomUUID(), 7L, ShipmentStatus.ASSIGNED, now));
+        service.record(new ShipmentEvent(UUID.randomUUID(), 7L, ShipmentStatus.ASSIGNED, "operador1", now));
 
         ArgumentCaptor<AuditEntry> captor = ArgumentCaptor.forClass(AuditEntry.class);
         verify(repository).save(captor.capture());
         assertThat(captor.getValue().getShipmentId()).isEqualTo(7L);
         assertThat(captor.getValue().getStatus()).isEqualTo(ShipmentStatus.ASSIGNED);
+        assertThat(captor.getValue().getActor()).isEqualTo("operador1");
         assertThat(captor.getValue().getOccurredAt()).isEqualTo(now);
     }
 
